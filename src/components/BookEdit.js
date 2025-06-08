@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useBooksContext from "../../hooks/use-books-context";
+import useBooksContext from "../hooks/use-books-context";
 const BookEdit=({onlastEdit,book})=>{
     const {onEdit} = useBooksContext()
 const [newTitle,setNewTitle] = useState(book.title)

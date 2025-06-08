@@ -2,7 +2,7 @@ import {useState } from 'react';
 import './BookShow.css'
 import BookEdit from '../BookEdit';
 
-import useBooksContext from '../../../hooks/use-books-context';
+import useBooksContext from '../../hooks/use-books-context';
 const BookShow=({book})=>{
 
 const [showEdit,setShowEdit]=useState(false)
