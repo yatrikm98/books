@@ -2,24 +2,27 @@ import { createContext, useCallback, useState } from "react";
 import axios from "axios";
 const BooksContext = createContext();
 
+
+const BASE_URL = 'https://books-mnhx.onrender.com/books';
+
 function Provider({ children }) {
     const [books, setBooks] = useState([]);
 
     const fetchBooks = useCallback( async () => {
-        const response = await axios.get('http://localhost:3001/books')
+        const response = await axios.get(BASE_URL)
         setBooks(response.data)
     },[])
 
 
     const onCreate = async (title) => {
-        const response = await axios.post('http://localhost:3001/books', {
+        const response = await axios.post(BASE_URL, {
             title,
         });
         setBooks([...books, response.data])
     }
 
     const onDelete = async (newId) => {
-        await axios.delete(`http://localhost:3001/books/${newId}`)
+        await axios.delete(`${BASE_URL}/${newId}`)
         const updatedBooks = books.filter((book) => {
             return (!(book.id === newId))
         })
@@ -27,7 +30,7 @@ function Provider({ children }) {
     }
 
     const onEdit = async (newTitle, id) => {
-        const response = await axios.put('http://localhost:3001/books/' + id, {
+        const response = await axios.put(`${BASE_URL}/${id}`, {
             title: newTitle
         })
         const EditedBooks = books.map((book) => {
