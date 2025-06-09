@@ -7,11 +7,15 @@ const BASE_URL = 'https://books-mnhx.onrender.com/books';
 
 function Provider({ children }) {
     const [books, setBooks] = useState([]);
+    const [loadingBooks, setLoadingBooks] = useState(false
 
-    const fetchBooks = useCallback( async () => {
+    )
+    const fetchBooks = useCallback(async () => {
+        setLoadingBooks(true)
         const response = await axios.get(BASE_URL)
+        setLoadingBooks(false)
         setBooks(response.data)
-    },[])
+    }, [])
 
 
     const onCreate = async (title) => {
@@ -49,7 +53,8 @@ function Provider({ children }) {
         fetchBooks,
         onCreate,
         onDelete,
-        onEdit
+        onEdit,
+        loadingBooks
     }
     return (
         <BooksContext.Provider value={valueToShare}>

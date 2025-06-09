@@ -4,13 +4,13 @@ import useBooksContext from "../hooks/use-books-context"
 
 
 
-const BookList=()=>{
-    const {books}=useBooksContext()
-    const renderedList=books.map((book,index)=>{
-    return <BookShow book={book} key={index}/>
+const BookList = () => {
+    const { books, loadingBooks } = useBooksContext()
+    const renderedList = books.map((book, index) => {
+        return <BookShow book={book} key={index} />
     })
 
-return <div className="book-list">
-{renderedList}</div>
+    return loadingBooks ? <div className="loadingBooks">Loading Books...</div> : <div className="book-list">
+        {renderedList}</div>
 }
 export default BookList;
